@@ -1,5 +1,5 @@
-# qr-botanist
-QR Code Handler for plant automation
+# botanist-api
+API for plant automation.
 
 
 Unfinished. WIP.
