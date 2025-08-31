@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.api.plants import router as plants_router
 
 app = FastAPI(
     title="QR Botanist",
@@ -33,3 +34,5 @@ async def list_plants():
             }
         }
     }
+
+app.include_router(plants_router)
