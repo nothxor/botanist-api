@@ -18,21 +18,4 @@ async def health_check():
         "service": "qr-botanist"
     }
 
-@app.get("/plants")
-async def list_plants():
-    return {
-        "plants": {
-            {
-                "id": 1,
-                "name": "Test Plant",
-                "species": "Monstera deliciosa"
-            },
-            {
-                "id": 2,
-                "name": "Another Plant",
-                "species": "Pothos aureus"
-            }
-        }
-    }
-
 app.include_router(plants_router)
