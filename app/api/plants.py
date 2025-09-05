@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 
 from app.models.plant import Plant
-from app.schemas.plant import PlantCreate
+from app.schemas.plant import PlantCreate, PlantUpdate
 
 router = APIRouter()
 
@@ -30,6 +30,16 @@ def create_new_plant(plant: PlantCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_plant)
     return new_plant
+
+@router.put("/plants/{id}")
+def update_single_plant(id: int, plant: PlantUpdate, db: Session = Depends(get_db)):
+    plant_from_db = get_plant_or_404(id, db)
+    if plant.species is not None:
+        plant_from_db.species = plant.species
+    if plant.notes is not None:
+        plant_from_db.notes = plant.notes
+    db.commit()
+    return plant_from_db
 
 def get_plant_or_404(plant_id: int, db: Session):
     plant = db.query(Plant).filter(Plant.id == plant_id).first()
